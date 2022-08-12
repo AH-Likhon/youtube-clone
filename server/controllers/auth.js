@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { createError } from '../error.js';
 
-// -------------------------------- SIGNUP METHOD --------------------------- //
+// ----------------------------------- SIGNUP METHOD ----------------------------- //
 
 export const signup = async (req, res, next) => {
     // console.log(req.body);
@@ -41,7 +41,7 @@ export const signin = async (req, res, next) => {
         const { password, ...others } = user._doc;
 
         res
-            .cookie('access-token', token, {
+            .cookie('access_token', token, {
                 httpOnly: true,
             })
             .status(200)
