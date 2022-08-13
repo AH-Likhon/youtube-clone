@@ -20,7 +20,7 @@ import logo from '../images/logo.png';
 
 const Container = styled.div`
     flex: 1;
-    background-color: ${({ theme }) => theme.bg};
+    background-color: ${({ theme }) => theme.bgLighter};
     ${'' /* height: 100vh; */}
     height: 930px;
     color: ${({ theme }) => theme.text};
