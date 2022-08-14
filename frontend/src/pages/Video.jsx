@@ -5,6 +5,7 @@ import ThumbDownOffAltOutlinedIcon from "@mui/icons-material/ThumbDownOffAltOutl
 import ReplyOutlinedIcon from "@mui/icons-material/ReplyOutlined";
 import AddTaskOutlinedIcon from "@mui/icons-material/AddTaskOutlined";
 import Comments from '../components/Comments';
+import Card from '../components/Card';
 
 const Container = styled.div`
     display: flex;
@@ -114,7 +115,7 @@ const Video = () => {
                 <VideoWrapper>
                     <iframe
                         width="100%"
-                        height="720"
+                        height="420"
                         src="https://www.youtube.com/embed/k3Vfj-e1Ma4"
                         title="YouTube video player"
                         frameborder="0"
@@ -158,7 +159,13 @@ const Video = () => {
                     <Comments />
                 </VideoWrapper>
             </Content>
-            <Recommendation>Recommendation</Recommendation>
+            <Recommendation>
+                <Card type="sm" />
+                <Card type="sm" />
+                <Card type="sm" />
+                <Card type="sm" />
+                <Card type="sm" />
+            </Recommendation>
         </Container>
     );
 };

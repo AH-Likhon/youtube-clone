@@ -4,6 +4,7 @@ import styled, { ThemeProvider } from "styled-components";
 import Menu from "./components/Menu";
 import NavBar from "./components/NavBar";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
 import Video from "./pages/Video";
 import { darkTheme, lightTheme } from "./utils/Theme";
 
@@ -34,6 +35,7 @@ function App() {
               <Routes>
                 <Route path="/">
                   <Route index element={<Home />} />
+                  <Route path="signin" element={<Login />} />
                   <Route path="video">
                     <Route path=":id" element={<Video />} />
                   </Route>

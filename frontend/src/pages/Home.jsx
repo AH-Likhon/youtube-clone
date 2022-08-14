@@ -7,7 +7,7 @@ const Container = styled.div`
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 20px;
+    ${'' /* gap: 20px; */}
 `;
 
 const Home = () => {
