@@ -96,18 +96,26 @@ const Menu = ({ darkMode, setDarkMode }) => {
                         YouTube
                     </Logo>
                 </Link>
-                <Item>
-                    <HomeIcon />
-                    Home
-                </Item>
-                <Item>
-                    <ExploreOutlinedIcon />
-                    Explore
-                </Item>
-                <Item>
-                    <SubscriptionsOutlinedIcon />
-                    Subscriptions
-                </Item>
+
+                <Link style={{ textDecoration: 'none', color: 'inherit' }} to="/">
+                    <Item>
+                        <HomeIcon />
+                        Home
+                    </Item>
+                </Link>
+                <Link style={{ textDecoration: 'none', color: 'inherit' }} to="/trends">
+                    <Item>
+                        <ExploreOutlinedIcon />
+                        Explore
+                    </Item>
+                </Link>
+
+                <Link style={{ textDecoration: 'none', color: 'inherit' }} to="/subscriptions">
+                    <Item>
+                        <SubscriptionsOutlinedIcon />
+                        Subscriptions
+                    </Item>
+                </Link>
                 <Hr />
                 <Item>
                     <VideoLibraryOutlinedIcon />

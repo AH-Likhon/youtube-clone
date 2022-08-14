@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
+import { format } from 'timeago.js';
+import axios from 'axios';
 
 const Container = styled.div`
     width: ${(props) => props.type !== 'sm' && '360px'};
@@ -50,18 +52,31 @@ const Info = styled.div`
     color: ${({ theme }) => theme.textSoft};
 `;
 
-const Card = ({ type }) => {
+const Card = ({ type, video }) => {
+    const [channel, setChannel] = useState({});
+
+    useEffect(() => {
+        const fetChannel = async () => {
+            const res = await axios.get(`/users/find/${video.userId}`);
+            console.log(res);
+            setChannel(res.data);
+        };
+        fetChannel();
+    }, [video.userId]);
+
     return (
         <Link style={{ textDecoration: 'none' }} to="/video/test">
             <Container type={type}>
-                <Img type={type} src="https://i9.ytimg.com/vi_webp/k3Vfj-e1Ma4/mqdefault.webp?v=6277c159&sqp=CIjm8JUG&rs=AOn4CLDeKmf_vlMC1q9RBEZu-XQApzm6sA" />
+                <Img type={type} src={video.imgUrl} />
+                {/* <Img type={type} src="https://i9.ytimg.com/vi_webp/k3Vfj-e1Ma4/mqdefault.webp?v=6277c159&sqp=CIjm8JUG&rs=AOn4CLDeKmf_vlMC1q9RBEZu-XQApzm6sA" /> */}
                 <Details type={type}>
-                    <ChannelImg type={type} src="https://yt3.ggpht.com/yti/APfAmoE-Q0ZLJ4vk3vqmV4Kwp0sbrjxLyB8Q4ZgNsiRH=s88-c-k-c0x00ffffff-no-rj-mo" />
+                    <ChannelImg type={type} src={channel.img} />
+                    {/* <ChannelImg type={type} src="https://yt3.ggpht.com/yti/APfAmoE-Q0ZLJ4vk3vqmV4Kwp0sbrjxLyB8Q4ZgNsiRH=s88-c-k-c0x00ffffff-no-rj-mo" /> */}
                     <Texts>
-                        <Title>New Video</Title>
-                        <ChannelName>Likhon Dev</ChannelName>
+                        <Title>{video.title}</Title>
+                        <ChannelName>{channel.name}</ChannelName>
                         <Info>
-                            660,908 views • 1 day ago
+                            {video.views} views • {format(video.createdAt)}
                         </Info>
                     </Texts>
                 </Details>
