@@ -5,9 +5,10 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: calc(100vh - 56px);
+    ${'' /* justify-content: center; */}
+    height: calc(930px - 56px);
     color: ${({ theme }) => theme.text};
+    margin-top: 30px; 
 `;
 
 const Wrapper = styled.div`
