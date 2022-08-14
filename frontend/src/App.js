@@ -1,7 +1,10 @@
 import { useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import Menu from "./components/Menu";
 import NavBar from "./components/NavBar";
+import Home from "./pages/Home";
+import Video from "./pages/Video";
 import { darkTheme, lightTheme } from "./utils/Theme";
 
 const Container = styled.div`
@@ -13,100 +16,34 @@ const Main = styled.div`
   background-color: ${({ theme }) => theme.bg};
 `;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  padding: 22px 26px;
+`;
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
 
   return (
-    <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-      <Container>
-        <Menu darkMode={darkMode} setDarkMode={setDarkMode} />
-        <Main>
-          <NavBar />
-          <Wrapper>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-            <h1>Videos</h1>
-          </Wrapper>
-        </Main>
-      </Container>
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+        <Container>
+          <Menu darkMode={darkMode} setDarkMode={setDarkMode} />
+          <Main>
+            <NavBar />
+            <Wrapper>
+              <Routes>
+                <Route path="/">
+                  <Route index element={<Home />} />
+                  <Route path="video">
+                    <Route path=":id" element={<Video />} />
+                  </Route>
+                </Route>
+              </Routes>
+            </Wrapper>
+          </Main>
+        </Container>
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 
