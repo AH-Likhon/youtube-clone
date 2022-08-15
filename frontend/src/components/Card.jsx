@@ -65,7 +65,7 @@ const Card = ({ type, video }) => {
     }, [video.userId]);
 
     return (
-        <Link style={{ textDecoration: 'none' }} to="/video/test">
+        <Link style={{ textDecoration: 'none' }} to={`/video/${video._id}`}>
             <Container type={type}>
                 <Img type={type} src={video.imgUrl} />
                 {/* <Img type={type} src="https://i9.ytimg.com/vi_webp/k3Vfj-e1Ma4/mqdefault.webp?v=6277c159&sqp=CIjm8JUG&rs=AOn4CLDeKmf_vlMC1q9RBEZu-XQApzm6sA" /> */}
