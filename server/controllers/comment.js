@@ -5,6 +5,7 @@ import { createError } from "../error.js";
 // --------------------------------------- ADD COMMENT --------------------------- //
 export const addComment = async (req, res, next) => {
     const newComment = new Comment({ ...req.body, userId: req.user.id });
+    console.log(newComment);
     try {
         const savedComment = await newComment.save();
         res.status(200).send(savedComment);

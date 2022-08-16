@@ -13,6 +13,7 @@ const Container = styled.div`
     diplay: flex;
     align-items: center;
     justify-content: center;
+    z-index: 999;
 `;
 
 const Wrapper = styled.div`

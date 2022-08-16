@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { format } from 'timeago.js';
 
 const Container = styled.div`
     display: flex;
@@ -38,7 +39,7 @@ const Text = styled.span`
     font-weight: 400;
 `;
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment, sComment }) => {
     const [channel, setChannel] = useState({});
 
     useEffect(() => {
@@ -54,7 +55,7 @@ const Comment = ({ comment }) => {
             <Avatar src={channel?.img} />
             {/* <Avatar src="https://yt3.ggpht.com/yti/APfAmoE-Q0ZLJ4vk3vqmV4Kwp0sbrjxLyB8Q4ZgNsiRH=s88-c-k-c0x00ffffff-no-rj-mo" /> */}
             <Details>
-                <Name>{channel?.name} <Date>1 day ago</Date></Name>
+                <Name>{channel?.name} <Date>{format(comment?.createdAt)}</Date></Name>
                 <Text>
                     {comment?.desc}
                     {/* Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus laborum delectus unde quaerat dolore culpa sit aliquam at. Vitae facere ipsum totam ratione exercitationem. Suscipit animi accusantium dolores ipsam ut. */}
