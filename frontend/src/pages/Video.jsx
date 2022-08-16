@@ -12,6 +12,7 @@ import axios from 'axios';
 import { dislike, fetchSuccess, like } from '../redux/videoSlice';
 import { format } from 'timeago.js';
 import { ThumbUp, ThumbUpOutlined, ThumbDownOffAltOutlined, ThumbDown } from '@mui/icons-material';
+import { subscription } from '../redux/userSlice';
 
 const Container = styled.div`
     display: flex;
@@ -114,6 +115,12 @@ const Subscribe = styled.button`
     cursor: pointer;
 `;
 
+const VideoFrame = styled.video`
+    max-height: 420px;
+    width: 100%;
+    object-fit: cover;
+`;
+
 const Video = () => {
     const { currentUser } = useSelector(state => state.user);
     const { currentVideo } = useSelector(state => state.video);
@@ -153,11 +160,17 @@ const Video = () => {
         dispatch(dislike(currentUser._id));
     };
 
+    const handleSub = async () => {
+        currentUser.subscribedUsers.includes(channel._id) ? await axios.put(`/users/unsub/${channel._id}`) : await axios.put(`/users/sub/${channel._id}`);
+        dispatch(subscription(channel._id));
+    };
+
     return (
         <Container>
             <Content>
                 <VideoWrapper>
-                    <iframe
+                    <VideoFrame src={currentVideo?.videoUrl} />
+                    {/* <iframe
                         width="100%"
                         height="420"
                         src="https://www.youtube.com/embed/k3Vfj-e1Ma4"
@@ -165,20 +178,20 @@ const Video = () => {
                         frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen
-                    ></iframe>
-                    <Title>{currentVideo.title}</Title>
+                    ></iframe> */}
+                    <Title>{currentVideo?.title}</Title>
                     <Details>
-                        <Info>{currentVideo.views} views • {format(currentVideo.createdAt)} </Info>
+                        <Info>{currentVideo?.views} views • {format(currentVideo?.createdAt)} </Info>
                         <Buttons>
                             <Button onClick={handleLike}>
-                                {currentVideo.likes?.includes(currentUser?._id) ? (
+                                {currentVideo?.likes?.includes(currentUser?._id) ? (
                                     <ThumbUp />
                                 ) : (
                                     <ThumbUpOutlined />
-                                )}{" "} {currentVideo.likes?.length}
+                                )}{" "} {currentVideo?.likes?.length}
                             </Button>
                             <Button onClick={handleDislike}>
-                                {currentVideo.dislikes?.includes(currentUser?._id) ? <ThumbDown /> : <ThumbDownOffAltOutlined />}{" "} Dislike
+                                {currentVideo?.dislikes?.includes(currentUser?._id) ? <ThumbDown /> : <ThumbDownOffAltOutlined />}{" "} Dislike
                             </Button>
                             <Button>
                                 <ReplyOutlinedIcon /> Share
@@ -191,21 +204,23 @@ const Video = () => {
                     <Hr />
                     <Channel>
                         <ChannelInfo>
-                            <Img src={channel.img} />
+                            <Img src={channel?.img} />
                             {/* <Img src="https://yt3.ggpht.com/yti/APfAmoE-Q0ZLJ4vk3vqmV4Kwp0sbrjxLyB8Q4ZgNsiRH=s88-c-k-c0x00ffffff-no-rj-mo" /> */}
                             <ChannelDetails>
-                                <ChannelName>{channel.name}</ChannelName>
-                                <ChannelCounter>{channel.subscribers} subscribers</ChannelCounter>
+                                <ChannelName>{channel?.name}</ChannelName>
+                                <ChannelCounter>{channel?.subscribers} subscribers</ChannelCounter>
                                 <Description>
-                                    {currentVideo.desc}
+                                    {currentVideo?.desc}
                                 </Description>
                             </ChannelDetails>
                         </ChannelInfo>
-                        <Subscribe>SUBSCRIBE</Subscribe>
+                        <Subscribe onClick={handleSub}>
+                            {currentUser?.subscribedUsers?.includes(channel._id) ? "SUBSCRIBED" : "SUBSCRIBE"}
+                        </Subscribe>
                     </Channel>
 
                     <Hr />
-                    <Comments />
+                    <Comments videoId={currentVideo._id} />
                 </VideoWrapper>
             </Content>
             <Recommendation>
