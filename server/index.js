@@ -45,9 +45,13 @@ app.use((err, req, res, next) => {
         status,
         message
     });
-})
+});
 
-app.listen(5000, () => {
+app.get('/', (req, res) => {
+    res.send('ok');
+});
+
+app.listen(process.env.PORT || 5000, () => {
     connectDB();
     console.log('Connected......');
 })
