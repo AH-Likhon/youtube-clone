@@ -5,6 +5,9 @@ import Card from './Card';
 
 const Container = styled.div`
     flex: 2;
+    @media only screen and (max-width: 475px) {
+        display: none;
+    };
 `;
 
 const Recommendation = ({ currentVideo }) => {

@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { loginFailure, loginStart, loginSuccess } from '../redux/userSlice';
 import { signInWithPopup } from 'firebase/auth';
 import { auth, provider } from '../firebase';
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
     display: flex;
@@ -73,6 +74,7 @@ const Login = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
     const dispatch = useDispatch();
 
@@ -100,7 +102,7 @@ const Login = () => {
                 }).then((res) => {
                     console.log(res.data)
                     dispatch(loginSuccess(res.data));
-                    // navigate("/")
+                    navigate("/")
                 });
             })
             .catch((error) => {

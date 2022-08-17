@@ -30,6 +30,10 @@ const Container = styled.div`
     font-size: 14px;
     position: sticky;
     top: 0;
+
+    @media only screen and (max-width: 475px) {
+        display: none;
+    };
 `;
 
 const Wrapper = styled.div`

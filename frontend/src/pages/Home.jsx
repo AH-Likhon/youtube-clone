@@ -9,6 +9,10 @@ const Container = styled.div`
     justify-content: space-between;
     flex-wrap: wrap;
     ${'' /* gap: 20px; */}
+
+    @media only screen and (max-width: 475px) {
+        justify-content: center;
+    };
 `;
 
 const Home = ({ type }) => {

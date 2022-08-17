@@ -4,8 +4,11 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import styled from 'styled-components';
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
-import { VideoCallOutlined } from '@mui/icons-material';
+import { VideoCallOutlined, Logout } from '@mui/icons-material';
+import { useDispatch } from 'react-redux';
 import Upload from './Upload';
+import { logOut } from '../redux/userSlice';
+import logo from '../images/logo.png';
 
 const Container = styled.div`
     position: sticky;
@@ -25,7 +28,6 @@ const Wrapper = styled.div`
 const Search = styled.div`
     position: absolute;
     width: 40%;
-    ${'' /* background-color: blue; */}
     left: 0px;
     right: 0px;
     margin: auto;
@@ -36,6 +38,11 @@ const Search = styled.div`
     border: 1px solid #ccc;
     border-radius: 3px;
     color: ${({ theme }) => theme.text};
+
+    @media only screen and (max-width: 475px) {
+        left: -160px;
+        right: 0px;
+    };
 `;
 
 const Input = styled.input`
@@ -52,7 +59,6 @@ const Button = styled.button`
     color: #3ea6ff;
     border-radius: 3px;
     font-weight: 500;
-    ${'' /* margin-top: 10px; */}
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -74,16 +80,71 @@ const Avatar = styled.img`
     background-color: #999;
 `;
 
+const Text = styled.p`
+    @media only screen and (max-width: 475px) {
+        display: none;
+    };
+`;
+
+const Logo = styled.div`
+    display: none;
+
+    @media only screen and (max-width: 475px) {
+        display: block;
+        position: relative;
+        margin: auto;
+        left: -240px;
+        width: 10%;
+    };
+`;
+
+const Logo1 = styled.div`
+    display: none;
+
+    @media only screen and (max-width: 475px) {
+        display: block;
+        position: relative;
+        margin: auto;
+        left: -320px;
+        width: 10%;
+    };
+`;
+
+const Img = styled.img`
+    height: 22px;
+`;
+
 const NavBar = () => {
     const [open, setOpen] = useState(false);
     const [query, setQuery] = useState("");
     const { currentUser } = useSelector(state => state.user);
     const navigate = useNavigate();
 
+    const dispatch = useDispatch();
+
+    const handleSignOut = async (e) => {
+        e.preventDefault();
+        dispatch(logOut());
+    };
+
     return (
         <>
             <Container>
                 <Wrapper>
+
+                    {
+                        currentUser ? <Link style={{ textDecoration: 'none', color: 'inherit' }} to="/">
+                            <Logo>
+                                <Img src={logo} />
+                            </Logo>
+                        </Link> : <Link style={{ textDecoration: 'none', color: 'inherit' }} to="/">
+                            <Logo1>
+                                <Img src={logo} />
+                            </Logo1>
+                        </Link>
+                    }
+
+
                     <Search>
                         <Input placeholder='Search' onChange={(e) => setQuery(e.target.value)} />
                         <SearchOutlinedIcon sx={{ cursor: 'pointer' }} onClick={() => navigate(`/search?q=${query}`)} />
@@ -92,7 +153,13 @@ const NavBar = () => {
                         currentUser ? <User>
                             <VideoCallOutlined style={{ cursor: 'pointer' }} onClick={() => setOpen(true)} />
                             <Avatar src={currentUser.img} />
-                            {currentUser.name}
+                            <Text>
+                                {currentUser.name.slice(0, 11)}
+                            </Text>
+                            <Button onClick={handleSignOut}>
+                                <Logout />
+                                SIGN OUT
+                            </Button>
                         </User> : <Link style={{ textDecoration: 'none', color: 'inherit' }} to="signin">
                             <Button>
                                 <AccountCircleOutlinedIcon />
