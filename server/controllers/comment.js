@@ -1,6 +1,6 @@
 import Video from "../models/Video.js";
 import Comment from "../models/Comment.js";
-import { createError } from "../error.js";
+import { createError } from "../others/error.js";
 
 // --------------------------------------- ADD COMMENT --------------------------- //
 export const addComment = async (req, res, next) => {

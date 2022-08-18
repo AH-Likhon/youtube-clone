@@ -17,7 +17,7 @@ const Container = styled.div`
 
 const Home = ({ type }) => {
     const [videos, setVideos] = useState([]);
-
+    // "proxy": "https://youtube-pr.herokuapp.com/api/"
     useEffect(() => {
         const fetchVideos = async () => {
             const res = await axios.get(`/videos/${type}`);

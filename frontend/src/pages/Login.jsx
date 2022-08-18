@@ -39,6 +39,7 @@ const SubTitle = styled.h2`
 const Input = styled.input`
     width: 100%;
     border: 1px solid ${({ theme }) => theme.soft};
+    color: ${({ theme }) => theme.text};
     border-radius: 3px;
     padding: 10px;
     background-color: transparent;
@@ -85,6 +86,7 @@ const Login = () => {
             const res = await axios.post('/auth/signin', { name, password });
             console.log(res.data);
             dispatch(loginSuccess(res.data));
+            navigate("/");
         } catch (error) {
             dispatch(loginFailure());
         }
@@ -102,7 +104,7 @@ const Login = () => {
                 }).then((res) => {
                     console.log(res.data)
                     dispatch(loginSuccess(res.data));
-                    navigate("/")
+                    navigate("/");
                 });
             })
             .catch((error) => {

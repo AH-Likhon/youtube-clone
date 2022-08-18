@@ -17,12 +17,12 @@ const Recommendation = ({ currentVideo }) => {
 
     useEffect(() => {
         const fetchVideos = async () => {
-            const res = await axios.get(`/videos/tags?tags=${currentVideo.tags}`);
-            const result = res.data.filter(video => video._id !== currentVideo._id);
+            const res = await axios.get(`/videos/tags?tags=${currentVideo?.tags}`);
+            const result = res.data.filter(video => video._id !== currentVideo?._id);
             setVideos(result);
         };
         fetchVideos();
-    }, [currentVideo.tags]);
+    }, [currentVideo?.tags]);
 
     return (
         <Container>

@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import User from '../models/User.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { createError } from '../error.js';
+import { createError } from '../others/error.js';
 
 // ----------------------------------- SIGNUP METHOD ----------------------------- //
 
