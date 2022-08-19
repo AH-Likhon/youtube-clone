@@ -30,7 +30,7 @@ const Home = ({ type }) => {
     return (
         <Container>
             {
-                videos.map((video) => <Card key={video._id} video={video} />)
+                Array.isArray(videos) && videos.map((video) => <Card key={video._id} video={video} />)
             };
         </Container>
     );

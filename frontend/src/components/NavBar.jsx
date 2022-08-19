@@ -152,9 +152,9 @@ const NavBar = () => {
                     {
                         currentUser ? <User>
                             <VideoCallOutlined style={{ cursor: 'pointer' }} onClick={() => setOpen(true)} />
-                            <Avatar src={currentUser.img} />
+                            <Avatar src={currentUser?.img} />
                             <Text>
-                                {currentUser.name.slice(0, 11)}
+                                {currentUser?.name?.slice(0, 11)}
                             </Text>
                             <Button onClick={handleSignOut}>
                                 <Logout />
