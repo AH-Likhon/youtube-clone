@@ -1,5 +1,6 @@
 import express from "express";
 import cors from 'cors';
+const app = express();
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import userRouter from './routers/users.js';
@@ -8,20 +9,20 @@ import commentRouter from './routers/comments.js';
 import authRouter from './routers/auth.js';
 import cookieParser from 'cookie-parser';
 
-const app = express();
 dotenv.config();
-app.use(cors());
-app.use(express.json());
-app.use(cookieParser());
+// app.use(cors());
 
 // <-----------------------------  cors option ----------------------------------> //
-// const corsOptions = {
-//     // origin: 'http://localhost:3000',
-//     origin: 'https://real-time-chat-web-app.netlify.app',
-//     credentials: true,
-//     optionSuccessStatus: 200
-// }
-// app.use(cors(corsOptions));
+const corsOptions = {
+    // origin: 'http://localhost:3000',
+    origin: 'https://fir-21b25.firebaseapp.com',
+    credentials: true,
+    optionSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use(cookieParser());
 
 const connectDB = () => {
     mongoose.connect(process.env.DB).then(() => {

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import Menu from "./components/Menu";
@@ -24,11 +25,12 @@ const Wrapper = styled.div`
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
+  const { currentUser } = useSelector((state) => state.user);
 
   return (
-    <BrowserRouter>
-      <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-        <Container>
+    <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+      <Container>
+        <BrowserRouter>
           <Menu darkMode={darkMode} setDarkMode={setDarkMode} />
           <Main>
             <NavBar />
@@ -39,7 +41,10 @@ function App() {
                   <Route path="trends" element={<Home type="trend" />} />
                   <Route path="subscriptions" element={<Home type="sub" />} />
                   <Route path="search" element={<Search />} />
-                  <Route path="signin" element={<Login />} />
+                  <Route
+                    path="signin"
+                    element={currentUser ? <Home /> : <Login />}
+                  />
                   <Route path="video">
                     <Route path=":id" element={<Video />} />
                   </Route>
@@ -47,9 +52,9 @@ function App() {
               </Routes>
             </Wrapper>
           </Main>
-        </Container>
-      </ThemeProvider>
-    </BrowserRouter>
+        </BrowserRouter>
+      </Container>
+    </ThemeProvider>
   );
 }
 
