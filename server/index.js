@@ -15,7 +15,7 @@ dotenv.config();
 // <-----------------------------  cors option ----------------------------------> //
 const corsOptions = {
     // origin: 'http://localhost:3000',
-    origin: 'https://fir-73289.firebaseapp.com',
+    origin: 'https://fir-21b25.firebaseapp.com',
     credentials: true,
     optionSuccessStatus: 200
 };
