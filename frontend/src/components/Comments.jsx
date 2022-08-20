@@ -1,7 +1,7 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { axiosInstance } from '../config';
 import Comment from './Comment';
 
 const Container = styled.div``;
@@ -39,7 +39,7 @@ const Comments = ({ videoId }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get(`/comments/${videoId}`);
+                const res = await axiosInstance.get(`/comments/${videoId}`);
                 // console.log(res?.data);
                 setComments(res.data);
             } catch (error) { };
@@ -51,7 +51,7 @@ const Comments = ({ videoId }) => {
         e.preventDefault();
         const addComment = async () => {
             try {
-                await axios.post("/comments", { videoId, desc: sComment });
+                await axiosInstance.post("/comments", { videoId, desc: sComment });
             } catch (error) { }
         };
         addComment();

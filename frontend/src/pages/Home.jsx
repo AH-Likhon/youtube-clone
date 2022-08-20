@@ -1,7 +1,7 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Card from '../components/Card';
+import { axiosInstance } from '../config';
 
 const Container = styled.div`
     display: flex;
@@ -20,7 +20,7 @@ const Home = ({ type }) => {
     // "proxy": "https://youtube-pr.herokuapp.com/api/"
     useEffect(() => {
         const fetchVideos = async () => {
-            const res = await axios.get(`/videos/${type}`);
+            const res = await axiosInstance.get(`/videos/${type}`);
             // console.log(res);
             setVideos(res.data);
         };
@@ -30,7 +30,7 @@ const Home = ({ type }) => {
     return (
         <Container>
             {
-                Array.isArray(videos) && videos.map((video) => <Card key={video._id} video={video} />)
+                videos.map((video) => <Card key={video._id} video={video} />)
             };
         </Container>
     );

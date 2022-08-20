@@ -1,6 +1,6 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { axiosInstance } from '../config';
 import Card from './Card';
 
 const Container = styled.div`
@@ -17,7 +17,7 @@ const Recommendation = ({ currentVideo }) => {
 
     useEffect(() => {
         const fetchVideos = async () => {
-            const res = await axios.get(`/videos/tags?tags=${currentVideo?.tags}`);
+            const res = await axiosInstance.get(`/videos/tags?tags=${currentVideo?.tags}`);
             const result = res.data.filter(video => video._id !== currentVideo?._id);
             setVideos(result);
         };
