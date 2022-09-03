@@ -114,9 +114,14 @@ const Login = () => {
         dispatch(loginStart());
         try {
             const res = await axiosInstance.post('/auth/signin', { name, password });
-            console.log(res.data);
+            // console.log(res.data);
             dispatch(loginSuccess(res.data));
             navigate("/");
+            if (res.data) {
+                setName("");
+                setEmail("");
+                setPassword("");
+            };
             Swal.fire({
                 position: 'top',
                 icon: 'success',
