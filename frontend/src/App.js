@@ -36,7 +36,7 @@ function App() {
             <NavBar />
             <Wrapper>
               <Routes>
-                <Route path="/">
+                <Route path="/" type="random">
                   <Route index element={<Home type="random" />} />
                   <Route path="trends" element={<Home type="trend" />} />
                   <Route path="subscriptions" element={<Home type="sub" />} />

@@ -9,6 +9,8 @@ import { useDispatch } from 'react-redux';
 import Upload from './Upload';
 import { logOut } from '../redux/userSlice';
 import logo from '../images/logo.png';
+import { axiosInstance } from '../config';
+import Swal from 'sweetalert2';
 
 const Container = styled.div`
     position: sticky;
@@ -122,9 +124,19 @@ const NavBar = () => {
 
     const dispatch = useDispatch();
 
-    const handleSignOut = async (e) => {
+    const handleSignOut = (e) => {
         e.preventDefault();
+        // console.log(currentUser);
         dispatch(logOut());
+        axiosInstance.get('/auth/logOut');
+        navigate("/");
+        Swal.fire({
+            position: 'top',
+            icon: 'warning',
+            title: 'Successfully logged out!',
+            showConfirmButton: false,
+            timer: 1500
+        });
     };
 
     return (

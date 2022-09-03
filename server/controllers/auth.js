@@ -1,4 +1,3 @@
-import mongoose from 'mongoose';
 import User from '../models/User.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
@@ -14,7 +13,7 @@ export const signup = async (req, res, next) => {
         const newUser = new User({ ...req.body, password: hash });
 
         await newUser.save();
-        res.status(200).send("User has been created successfully!");
+        res.status(200).send("Registration has been completed successfully!");
     } catch (error) {
         next(error);
 
@@ -75,3 +74,17 @@ export const googleAuth = async (req, res, next) => {
         next(error);
     }
 }
+
+
+// ------------------------------------------ LogOut ------------------------------ //
+export const logOut = async (req, res, next) => {
+    try {
+        // console.log(req.user);
+        // console.log('Logout completed');
+        res.clearCookie('access_token');
+        await req.user.save();
+    } catch (error) {
+        next(error);
+    }
+}
+
