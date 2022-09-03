@@ -40,7 +40,7 @@ const Close = styled.div`
     cursor:pointer;
 `;
 
-const Title = styled.h1`
+const Title = styled.h2`
     text-align: center;
 `;
 

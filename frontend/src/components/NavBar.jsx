@@ -163,7 +163,7 @@ const NavBar = () => {
                     </Search>
                     {
                         currentUser ? <User>
-                            <VideoCallOutlined style={{ cursor: 'pointer' }} onClick={() => setOpen(true)} />
+                            <VideoCallOutlined style={{ cursor: 'pointer' }} onClick={() => setOpen(!open)} />
                             <Avatar src={currentUser?.img} />
                             <Text>
                                 {currentUser?.name?.slice(0, 11)}

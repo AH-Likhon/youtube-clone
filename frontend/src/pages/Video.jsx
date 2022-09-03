@@ -5,12 +5,13 @@ import AddTaskOutlinedIcon from "@mui/icons-material/AddTaskOutlined";
 import Comments from '../components/Comments';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from "react-router-dom";
-import { dislike, fetchSuccess, like } from '../redux/videoSlice';
+import { dislike, fetchSuccess, like, views } from '../redux/videoSlice';
 import { format } from 'timeago.js';
 import { ThumbUp, ThumbUpOutlined, ThumbDownOffAltOutlined, ThumbDown } from '@mui/icons-material';
 import { subscription } from '../redux/userSlice';
 import Recommendation from '../components/Recommendation';
 import { axiosInstance } from '../config';
+import ShareVideo from '../components/ShareVideo';
 
 const Container = styled.div`
     display: flex;
@@ -125,6 +126,10 @@ const Video = () => {
 
     // const [video, setVideo] = useState({});
     const [channel, setChannel] = useState({});
+    const [share, setShare] = useState(false);
+
+
+    console.log(share);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -137,12 +142,14 @@ const Video = () => {
                 // setVideo(videoRes.data);
                 setChannel(channelRes.data);
                 dispatch(fetchSuccess(videoRes.data));
+
             } catch (error) {
 
             }
         };
         fetchData();
-    }, [path, dispatch]);
+
+    }, [path, dispatch, currentUser]);
 
     const handleLike = async () => {
         await axiosInstance.put(`/users/like/${currentVideo._id}`);
@@ -159,12 +166,18 @@ const Video = () => {
         dispatch(subscription(channel._id));
     };
 
+    const handleViews = async () => {
+        await axiosInstance.put(`/videos/view/${currentVideo._id}`);
+        dispatch(views(currentVideo._id));
+    };
+
     return (
-        <Container>
-            <Content>
-                <VideoWrapper>
-                    <VideoFrame src={currentVideo?.videoUrl} controls />
-                    {/* <iframe
+        <>
+            <Container>
+                <Content>
+                    <VideoWrapper>
+                        <VideoFrame onPlay={handleViews} src={currentVideo?.videoUrl} controls />
+                        {/* <iframe
                         width="100%"
                         height="420"
                         src="https://www.youtube.com/embed/k3Vfj-e1Ma4"
@@ -173,52 +186,56 @@ const Video = () => {
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen
                     ></iframe> */}
-                    <Title>{currentVideo?.title}</Title>
-                    <Details>
-                        <Info>{currentVideo?.views} views • {format(currentVideo?.createdAt)} </Info>
-                        <Buttons>
-                            <Button onClick={handleLike}>
-                                {currentVideo?.likes?.includes(currentUser?._id) ? (
-                                    <ThumbUp />
-                                ) : (
-                                    <ThumbUpOutlined />
-                                )}{" "} {currentVideo?.likes?.length}
-                            </Button>
-                            <Button onClick={handleDislike}>
-                                {currentVideo?.dislikes?.includes(currentUser?._id) ? <ThumbDown /> : <ThumbDownOffAltOutlined />}{" "} Dislike
-                            </Button>
-                            <Button>
-                                <ReplyOutlinedIcon /> Share
-                            </Button>
-                            <Button>
-                                <AddTaskOutlinedIcon /> Save
-                            </Button>
-                        </Buttons>
-                    </Details>
-                    <Hr />
-                    <Channel>
-                        <ChannelInfo>
-                            <Img src={channel?.img} />
-                            {/* <Img src="https://yt3.ggpht.com/yti/APfAmoE-Q0ZLJ4vk3vqmV4Kwp0sbrjxLyB8Q4ZgNsiRH=s88-c-k-c0x00ffffff-no-rj-mo" /> */}
-                            <ChannelDetails>
-                                <ChannelName>{channel?.name}</ChannelName>
-                                <ChannelCounter>{channel?.subscribers} subscribers</ChannelCounter>
-                                <Description>
-                                    {currentVideo?.desc}
-                                </Description>
-                            </ChannelDetails>
-                        </ChannelInfo>
-                        <Subscribe onClick={handleSub}>
-                            {currentUser?.subscribedUsers?.includes(channel?._id) ? "SUBSCRIBED" : "SUBSCRIBE"}
-                        </Subscribe>
-                    </Channel>
+                        <Title>{currentVideo?.title}</Title>
+                        <Details>
+                            <Info>{currentVideo?.views} views • {format(currentVideo?.createdAt)} </Info>
+                            <Buttons>
+                                <Button onClick={handleLike}>
+                                    {currentVideo?.likes?.includes(currentUser?._id) ? (
+                                        <ThumbUp />
+                                    ) : (
+                                        <ThumbUpOutlined />
+                                    )}{" "} {currentVideo?.likes?.length}
+                                </Button>
+                                <Button onClick={handleDislike}>
+                                    {currentVideo?.dislikes?.includes(currentUser?._id) ? <ThumbDown /> : <ThumbDownOffAltOutlined />}{" "} Dislike
+                                </Button>
+                                <Button onClick={() => setShare(!share)}>
+                                    <ReplyOutlinedIcon /> Share
+                                </Button>
+                                <Button>
+                                    <AddTaskOutlinedIcon /> Save
+                                </Button>
+                            </Buttons>
+                        </Details>
+                        <Hr />
+                        <Channel>
+                            <ChannelInfo>
+                                <Img src={channel?.img} />
+                                {/* <Img src="https://yt3.ggpht.com/yti/APfAmoE-Q0ZLJ4vk3vqmV4Kwp0sbrjxLyB8Q4ZgNsiRH=s88-c-k-c0x00ffffff-no-rj-mo" /> */}
+                                <ChannelDetails>
+                                    <ChannelName>{channel?.name}</ChannelName>
+                                    <ChannelCounter>{channel?.subscribers} subscribers</ChannelCounter>
+                                    <Description>
+                                        {currentVideo?.desc}
+                                    </Description>
+                                </ChannelDetails>
+                            </ChannelInfo>
+                            <Subscribe onClick={handleSub}>
+                                {currentUser?.subscribedUsers?.includes(channel?._id) ? "SUBSCRIBED" : "SUBSCRIBE"}
+                            </Subscribe>
+                        </Channel>
 
-                    <Hr />
-                    <Comments videoId={currentVideo?._id} />
-                </VideoWrapper>
-            </Content>
-            <Recommendation currentVideo={currentVideo} />
-        </Container>
+                        <Hr />
+                        <Comments videoId={currentVideo?._id} />
+                    </VideoWrapper>
+                </Content>
+                <Recommendation currentVideo={currentVideo} />
+            </Container>
+            {
+                share && <ShareVideo setShare={setShare} />
+            }
+        </>
     );
 };
 

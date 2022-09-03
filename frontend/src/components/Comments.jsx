@@ -45,7 +45,7 @@ const Comments = ({ videoId }) => {
             } catch (error) { };
         };
         fetchData();
-    }, [videoId, sComment]);
+    }, [videoId, sComment, comments]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
