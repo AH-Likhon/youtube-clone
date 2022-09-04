@@ -233,7 +233,7 @@ const Video = () => {
                 <Recommendation currentVideo={currentVideo} />
             </Container>
             {
-                share && <ShareVideo setShare={setShare} />
+                share && <ShareVideo currentVideo={currentVideo} setShare={setShare} />
             }
         </>
     );
