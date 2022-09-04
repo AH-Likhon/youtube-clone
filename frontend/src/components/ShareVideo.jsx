@@ -21,6 +21,10 @@ const Container = styled.div`
     justify-content: center;
     z-index: 999;
     top: 320px;
+
+    @media only screen and (max-width: 475px) {
+        top: 200px;
+    };
 `;
 
 const Wrapper = styled.div`
@@ -36,8 +40,7 @@ const Wrapper = styled.div`
     margin: 20px auto;
 
     @media only screen and (max-width: 475px) {
-        width: 380px;
-        margin-left: 30px;
+        width: 385px;
     };
     
 `;
@@ -72,7 +75,6 @@ const Search = styled.div`
     color: ${({ theme }) => theme.text};
 
     @media only screen and (max-width: 475px) {
-        left: -160px;
         right: 0px;
     };
 `;
@@ -88,8 +90,8 @@ const Copy = styled.p`
     cursor: pointer;
     z-index: 99999;
     color: #2966e7;
-    font-size: 16px;
-    font-weight: 400;
+    font-size: 14px;
+    font-weight: 700;
 `;
 
 const ShareVideo = ({ setShare, currentVideo }) => {
@@ -98,7 +100,7 @@ const ShareVideo = ({ setShare, currentVideo }) => {
 
     const handleCopy = () => {
         navigator.clipboard.writeText(currentVideo.videoUrl);
-        setAlert("Copied");
+        setAlert("COPIED");
 
         setTimeout(() => {
             setAlert("");
@@ -125,19 +127,19 @@ const ShareVideo = ({ setShare, currentVideo }) => {
                     modules={[Navigation]}
                 >
                     <SwiperSlide>
-                        <FacebookShareButton url={currentVideo.videoUrl} quote={currentVideo.title} hashtag={`${currentVideo.tags.map(e => '#' + e)}`}>
+                        <FacebookShareButton className='whatssp' url={currentVideo.videoUrl} quote={currentVideo.title} hashtag={`${currentVideo.tags.map(e => '#' + e)}`}>
                             <FacebookIcon size={42} round={true} />
                         </FacebookShareButton>
-                        <WhatsappShareButton style={{ margin: '0px -170px' }} url={currentVideo.videoUrl} quote={currentVideo.title} hashtag={`${currentVideo.tags.map(e => '#' + e)}`}>
+                        <WhatsappShareButton style={{ margin: '0px -170px', }} url={currentVideo.videoUrl} quote={currentVideo.title} hashtag={`${currentVideo.tags.map(e => '#' + e)}`}>
                             <WhatsappIcon size={42} round={true} />
                         </WhatsappShareButton>
-                        <LinkedinShareButton style={{ marginRight: '-170px' }} url={currentVideo.videoUrl} quote={currentVideo.title} hashtag={`${currentVideo.tags.map(e => '#' + e)}`}>
+                        <LinkedinShareButton style={{ marginRight: '-170px', }} url={currentVideo.videoUrl} quote={currentVideo.title} hashtag={`${currentVideo.tags.map(e => '#' + e)}`}>
                             <LinkedinIcon size={42} round={true} />
                         </LinkedinShareButton>
-                        <TwitterShareButton style={{ marginRight: '-170px' }} url={currentVideo.videoUrl} quote={currentVideo.title} hashtag={`${currentVideo.tags.map(e => '#' + e)}`}>
+                        <TwitterShareButton style={{ marginRight: '-170px', }} url={currentVideo.videoUrl} quote={currentVideo.title} hashtag={`${currentVideo.tags.map(e => '#' + e)}`}>
                             <TwitterIcon size={42} round={true} />
                         </TwitterShareButton>
-                        <TelegramShareButton style={{ marginRight: '-170px' }} url={currentVideo.videoUrl} quote={currentVideo.title} hashtag={`${currentVideo.tags.map(e => '#' + e)}`}>
+                        <TelegramShareButton style={{ marginRight: '-170px', }} url={currentVideo.videoUrl} quote={currentVideo.title} hashtag={`${currentVideo.tags.map(e => '#' + e)}`}>
                             <TelegramIcon size={42} round={true} />
                         </TelegramShareButton>
                         <EmailShareButton url={currentVideo.videoUrl} quote={currentVideo.title} hashtag={`${currentVideo.tags.map(e => '#' + e)}`}>
@@ -149,7 +151,7 @@ const ShareVideo = ({ setShare, currentVideo }) => {
                 <Search>
                     <Input placeholder={currentVideo.videoUrl} />
                     {
-                        alert ? <Copy>{alert}</Copy> : <Copy onClick={handleCopy}>Copy</Copy>
+                        alert ? <Copy>{alert}</Copy> : <Copy onClick={handleCopy}>COPY</Copy>
                     }
                 </Search>
             </Wrapper>

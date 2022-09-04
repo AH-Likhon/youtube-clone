@@ -80,6 +80,7 @@ const Avatar = styled.img`
     height: 32px;
     border-radius: 50%;
     background-color: #999;
+    cursor: pointer;
 `;
 
 const Text = styled.p`
@@ -118,9 +119,12 @@ const Img = styled.img`
 
 const NavBar = () => {
     const [open, setOpen] = useState(false);
+    const [openMenu, setOpenMenu] = useState(false);
     const [query, setQuery] = useState("");
     const { currentUser } = useSelector(state => state.user);
     const navigate = useNavigate();
+
+    console.log(openMenu);
 
     const dispatch = useDispatch();
 
@@ -164,7 +168,7 @@ const NavBar = () => {
                     {
                         currentUser ? <User>
                             <VideoCallOutlined style={{ cursor: 'pointer' }} onClick={() => setOpen(!open)} />
-                            <Avatar src={currentUser?.img} />
+                            <Avatar onClick={() => setOpenMenu(!openMenu)} src={currentUser?.img} />
                             <Text>
                                 {currentUser?.name?.slice(0, 11)}
                             </Text>

@@ -18,7 +18,6 @@ import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import SettingsBrightnessOutlinedIcon from "@mui/icons-material/SettingsBrightnessOutlined";
 import { useSelector } from 'react-redux';
-import { VideoCallOutlined } from '@mui/icons-material';
 import logo from '../images/logo.png';
 
 const Container = styled.div`
@@ -90,21 +89,6 @@ const Title = styled.h2`
     font-weight: 500;
     color: #aaa;
     margin-bottom: 20px;
-`;
-
-const User = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 500;
-    color: ${({ theme }) => theme.text};
-`;
-
-const Avatar = styled.img`
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background-color: #999;
 `;
 
 const Menu = ({ darkMode, setDarkMode }) => {

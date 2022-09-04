@@ -8,7 +8,7 @@
     font-size: 15px;
     height: 20%;
     position: relative;
-    top: 70px;
+    top: 67px;
   
     /* Center slide text vertically */
     display: -webkit-box;
@@ -29,3 +29,12 @@
     font-size: 20px !important;
     font-weight: bolder;
   }
+
+  @media only screen and (max-width: 475px) {
+    .whatssp{
+      margin-left: -50px !important;
+    }
+    .swiper-slide{
+      left: 27px;
+    }
+};
