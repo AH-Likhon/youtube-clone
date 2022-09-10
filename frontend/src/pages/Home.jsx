@@ -6,18 +6,19 @@ import { axiosInstance } from '../config';
 const Container = styled.div`
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
-    ${'' /* gap: 20px; */}
+    gap: 22px;
 
     @media only screen and (max-width: 475px) {
         justify-content: center;
+        gap: 0px;
     };
 `;
 
 const Home = ({ type }) => {
     const [videos, setVideos] = useState([]);
-    // "proxy": "https://youtube-pr.herokuapp.com/api/"
+
     useEffect(() => {
         const fetchVideos = async () => {
             const res = await axiosInstance.get(`/videos/${type}`);

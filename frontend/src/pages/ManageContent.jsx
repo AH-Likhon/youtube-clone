@@ -7,13 +7,13 @@ import { axiosInstance } from '../config';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import DoneIcon from '@mui/icons-material/Done';
-import { format } from 'timeago.js';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import Comments from '../components/Comments';
 
 const Container = styled.div`
     background-color: ${({ theme }) => theme.bgLighter};
     width: 100%;
-    ${'' /* margin-bottom: 5000px; */}
 
     @media only screen and (max-width: 475px) {
         height: auto;
@@ -34,10 +34,6 @@ const Heading = styled.h3`
 `;
 
 const Search = styled.div`
-    ${'' /* position: absolute;
-    width: 40%;
-    left: 0px;
-    right: 0px; */}
     width: 50%;
     margin: 10px 0px 10px 10px;
     display: flex;
@@ -58,31 +54,25 @@ const Input = styled.input`
     background-color: transparent;
     outline: none;
     padding: 5px;
-    ${'' /* text-align: left; */}
     color: ${({ theme }) => theme.text};
 `;
 
 const Table = styled.table`
     width: 100%;
-    ${'' /* border: 1px solid red; */}
     text-align: center;
     border-collapse: collapse;
     overflow-x: scroll;
-    ${'' /* margin: 20px 0px; */}
 `;
-const TR = styled.tr`
-    ${'' /* border: 1px solid white; */}
-`;
+const TR = styled.tr``;
+
 const TH = styled.th`
     border: 1px solid ${({ theme }) => theme.border};
-    ${'' /* border-radius: 30px; */}
     padding: 10px 0px;
     color: ${({ theme }) => theme.textSoft};
     font-weight: 500;
 `;
 const TD = styled.td`
     border: 1px solid ${({ theme }) => theme.border};
-    ${'' /* border-radius: 30px; */}
     padding: 10px 0px;
     font-size: 14px;
     font-weight: 400;
@@ -94,7 +84,6 @@ const TD = styled.td`
 `;
 
 const InnerTH = styled.div`
-    ${'' /* width: 200px !important; */}
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -104,9 +93,6 @@ const InnerTH = styled.div`
 
 
 const VideoContainer = styled.div`
-    ${'' /* width: 150px; */}
-    ${'' /* margin-bottom: ${(props) => props.type === 'sm' ? '10px' : '45px'}; */}
-    ${'' /* position: relative; */}
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -138,11 +124,17 @@ const ManageContent = () => {
     const [click, setClick] = useState(false);
     const [videoId, setVideoId] = useState('');
 
-    console.log(videos);
+    // console.log(videos);
 
     const handleClick = (id) => {
         setClick(!click);
         setVideoId(id);
+    }
+
+    const handleDelete = async () => {
+        // console.log(videoId);
+        await axiosInstance.delete(`/videos/${videoId}`);
+        setClick(!click);
     }
 
     useEffect(() => {
@@ -152,7 +144,7 @@ const ManageContent = () => {
             setVideos(res.data);
         };
         fetchVideos();
-    }, [currentUser]);
+    }, [currentUser, videos]);
 
 
     return (
@@ -163,6 +155,12 @@ const ManageContent = () => {
                 <Search>
                     <FilterListIcon />
                     <Input placeholder='Filter' onChange={e => console.log(e.target.value)} />
+                    {
+                        click && <>
+                            <EditIcon sx={{ margin: '0px 10px', cursor: 'pointer', fontSize: '22px' }} />
+                            <DeleteForeverIcon onClick={handleDelete} sx={{ cursor: 'pointer', fontSize: '22px' }} />
+                        </>
+                    }
                 </Search>
 
                 <Table>
@@ -172,6 +170,7 @@ const ManageContent = () => {
                                 <CheckBoxOutlineBlankIcon sx={{ cursor: 'pointer', fontSize: '20px !important', color: 'gray !important' }} /> Video
                             </InnerTH>
                         </TH>
+                        <TH>Date</TH>
                         <TH>Views</TH>
                         <TH>Likes</TH>
                         <TH>Dislikes</TH>
@@ -190,6 +189,7 @@ const ManageContent = () => {
                                     </VideoContainer>
                                 </InnerTH>
                             </TD>
+                            <TD>{video.createdAt.toString().slice(0, 10)}</TD>
                             <TD>{video.views}</TD>
                             <TD>{video.likes.length}</TD>
                             <TD>{video.dislikes.length}</TD>
@@ -197,9 +197,6 @@ const ManageContent = () => {
                                 {video.tags.join(',')}
                             </TD>
                             <TD>
-                                {/* {
-                                    axiosInstance.get(`/comments/${video.videoId}`)
-                                } */}
                                 <Comments type="length" videoId={video._id} />
                             </TD>
                         </TR>)

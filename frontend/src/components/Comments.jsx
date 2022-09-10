@@ -77,7 +77,6 @@ const Comments = ({ type, videoId }) => {
                     {/* <Avatar src="https://yt3.ggpht.com/yti/APfAmoE-Q0ZLJ4vk3vqmV4Kwp0sbrjxLyB8Q4ZgNsiRH=s88-c-k-c0x00ffffff-no-rj-mo" /> */}
                     <Avatar src={currentUser?.img} />
                     <Input value={sComment} onChange={(e) => setSComment(e.target.value)} placeholder='Add a comment.....' />
-                    {/* <Button>Add</Button> */}
                 </NewComment>
                 {
                     comments.map(comment => <Comment sComment={sComment} key={comment._id} comment={comment} />)

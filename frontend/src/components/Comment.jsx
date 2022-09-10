@@ -58,7 +58,6 @@ const Comment = ({ comment, sComment }) => {
                 <Name>{channel?.name} <Date>{format(comment?.createdAt)}</Date></Name>
                 <Text>
                     {comment?.desc}
-                    {/* Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus laborum delectus unde quaerat dolore culpa sit aliquam at. Vitae facere ipsum totam ratione exercitationem. Suscipit animi accusantium dolores ipsam ut. */}
                 </Text>
             </Details>
         </Container>

@@ -13,7 +13,6 @@ const Container = styled.div`
     background-color: ${({ theme }) => theme.bgLighter};
     height: 120px;
     width: 100%;
-    ${'' /* margin-bottom: 5000px; */}
 
     @media only screen and (max-width: 475px) {
         height: auto;
@@ -105,9 +104,7 @@ const Button = styled.button`
 `;
 
 
-const MenuWrapper = styled.div`
-    ${'' /* width: 100%; */}
-`;
+const MenuWrapper = styled.div``;
 
 const MenuUL = styled.ul`
     display: flex;
@@ -140,16 +137,11 @@ const MenuLI = styled.li`
 
     &:first-child{
         background-color: #e10d0d;
-        ${'' /* background-color: #3EA6FF; */}
     }
 
     @media only screen and (max-width: 475px) {
         font-size: 11px;
     };
-
-    ${'' /* &:hover{
-        background-color: #3EA6FF;
-    } */}
 `;
 
 const MenuBox = styled.div`
@@ -165,8 +157,6 @@ const MenuBoxImg = styled.img`
     width: 250px;
     height: 180px;
     margin: 10px 0px;
-    ${'' /* border-radius: 50%; */}
-    ${'' /* background-color: #999; */}
     cursor: pointer;
 
     @media only screen and (max-width: 475px) {
@@ -178,13 +168,14 @@ const MenuBoxImg = styled.img`
 const VideoContainer = styled.div`
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
+    gap: 22px;
     margin: 20px auto;
-    ${'' /* gap: 20px; */}
 
     @media only screen and (max-width: 475px) {
         justify-content: center;
+        gap: 0px;
     };
 `;
 
