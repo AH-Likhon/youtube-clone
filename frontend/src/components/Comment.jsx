@@ -30,7 +30,7 @@ const Name = styled.span`
 const Date = styled.span`
     font-ize: 12px;
     font-weight: 400;
-    color: ${({ theme }) => theme.stextSft};
+    color: ${({ theme }) => theme.textSoft};
     margin-left: 5px;
 `;
 

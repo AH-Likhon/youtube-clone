@@ -17,6 +17,7 @@ const Container = styled.div`
     top: 0;
     background-color: ${({ theme }) => theme.bgLighter};
     height: 56px;
+    z-index: 9999;
 `;
 
 const Wrapper = styled.div`
@@ -84,6 +85,8 @@ const Avatar = styled.img`
 `;
 
 const Text = styled.p`
+    cursor: pointer;
+    
     @media only screen and (max-width: 475px) {
         display: none;
     };
@@ -119,12 +122,9 @@ const Img = styled.img`
 
 const NavBar = () => {
     const [open, setOpen] = useState(false);
-    const [openMenu, setOpenMenu] = useState(false);
     const [query, setQuery] = useState("");
     const { currentUser } = useSelector(state => state.user);
     const navigate = useNavigate();
-
-    console.log(openMenu);
 
     const dispatch = useDispatch();
 
@@ -168,8 +168,8 @@ const NavBar = () => {
                     {
                         currentUser ? <User>
                             <VideoCallOutlined style={{ cursor: 'pointer' }} onClick={() => setOpen(!open)} />
-                            <Avatar onClick={() => setOpenMenu(!openMenu)} src={currentUser?.img} />
-                            <Text>
+                            <Avatar onClick={() => navigate('/mychannel')} src={currentUser?.img} />
+                            <Text onClick={() => navigate('/mychannel')}>
                                 {currentUser?.name?.slice(0, 11)}
                             </Text>
                             <Button onClick={handleSignOut}>

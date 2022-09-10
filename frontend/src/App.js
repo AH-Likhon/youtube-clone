@@ -6,6 +6,8 @@ import Menu from "./components/Menu";
 import NavBar from "./components/NavBar";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import ManageContent from "./pages/ManageContent";
+import MyChannel from "./pages/MyChannel";
 import Search from "./pages/Search";
 import Video from "./pages/Video";
 import { darkTheme, lightTheme } from "./utils/Theme";
@@ -48,6 +50,14 @@ function App() {
                   <Route path="video">
                     <Route path=":id" element={<Video />} />
                   </Route>
+                  <Route
+                    path="mychannel"
+                    element={currentUser ? <MyChannel /> : <Home />}
+                  />
+                  <Route
+                    path="manage-videos"
+                    element={currentUser ? <ManageContent /> : <Home />}
+                  />
                 </Route>
               </Routes>
             </Wrapper>

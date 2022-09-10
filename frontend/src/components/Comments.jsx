@@ -4,7 +4,9 @@ import styled from 'styled-components';
 import { axiosInstance } from '../config';
 import Comment from './Comment';
 
-const Container = styled.div``;
+const Container = styled.div`
+    display: ${(props) => props.type === 'length' && 'none'}
+`;
 
 const NewComment = styled.form`
     display: flex;
@@ -28,8 +30,15 @@ const Input = styled.input`
     color: ${({ theme }) => theme.text};
 `;
 
+const Text = styled.span`
+    font-size: 14px;
+    font-weight: 400;
+    color: ${({ theme }) => theme.text};
+    display: ${(props) => props.type === 'length' ? 'block' : 'none'}
+`;
 
-const Comments = ({ videoId }) => {
+
+const Comments = ({ type, videoId }) => {
     const { currentUser } = useSelector(state => state.user);
     const [comments, setComments] = useState([]);
     const [sComment, setSComment] = useState("");
@@ -62,17 +71,27 @@ const Comments = ({ videoId }) => {
     // console.log(comment);
 
     return (
-        <Container>
-            <NewComment onSubmit={handleSubmit}>
-                {/* <Avatar src="https://yt3.ggpht.com/yti/APfAmoE-Q0ZLJ4vk3vqmV4Kwp0sbrjxLyB8Q4ZgNsiRH=s88-c-k-c0x00ffffff-no-rj-mo" /> */}
-                <Avatar src={currentUser?.img} />
-                <Input value={sComment} onChange={(e) => setSComment(e.target.value)} placeholder='Add a comment.....' />
-                {/* <Button>Add</Button> */}
-            </NewComment>
-            {
-                comments.map(comment => <Comment sComment={sComment} key={comment._id} comment={comment} />)
-            }
-        </Container>
+        <>
+            <Container type={type}>
+                <NewComment onSubmit={handleSubmit}>
+                    {/* <Avatar src="https://yt3.ggpht.com/yti/APfAmoE-Q0ZLJ4vk3vqmV4Kwp0sbrjxLyB8Q4ZgNsiRH=s88-c-k-c0x00ffffff-no-rj-mo" /> */}
+                    <Avatar src={currentUser?.img} />
+                    <Input value={sComment} onChange={(e) => setSComment(e.target.value)} placeholder='Add a comment.....' />
+                    {/* <Button>Add</Button> */}
+                </NewComment>
+                {
+                    comments.map(comment => <Comment sComment={sComment} key={comment._id} comment={comment} />)
+                }
+            </Container>
+
+            <Text type={type}>
+                {
+                    comments.length
+                }
+            </Text>
+
+        </>
+
     );
 };
 
