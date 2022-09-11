@@ -7,17 +7,17 @@ import { createError } from '../others/error.js';
 
 export const signup = async (req, res, next) => {
     // console.log(req.body);
-    try {
-        const salt = bcrypt.genSaltSync(10);
-        const hash = bcrypt.hashSync(req.body.password, salt);
-        const newUser = new User({ ...req.body, password: hash });
+    // try {
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(req.body.password, salt);
+    const newUser = new User({ ...req.body, password: hash });
 
-        await newUser.save();
-        res.status(200).send("Registration has been completed successfully!");
-    } catch (error) {
-        next(error);
+    await newUser.save();
+    res.status(200).send("Registration has been completed successfully!");
+    // } catch (error) {
+    //     next(error);
 
-    }
+    // }
 };
 
 
@@ -25,7 +25,7 @@ export const signup = async (req, res, next) => {
 
 export const signin = async (req, res, next) => {
     // console.log(req.body);
-
+    // try {
     const user = await User.findOne({ name: req.body.name });
     if (!user) {
         return next(createError(404, 'User Not Found'));
@@ -42,9 +42,6 @@ export const signin = async (req, res, next) => {
     res.cookie('access_token', token, {
         httpOnly: true,
     }).status(200).json(others);
-
-    // try {
-
 
     // } catch (error) {
     //     next(error);
@@ -81,13 +78,13 @@ export const googleAuth = async (req, res, next) => {
 
 // ------------------------------------------ LogOut ------------------------------ //
 export const logOut = async (req, res, next) => {
-    try {
-        // console.log(req.user);
-        // console.log('Logout completed');
-        res.clearCookie('access_token');
-        await req.user.save();
-    } catch (error) {
-        next(error);
-    }
+    // try {
+    // console.log(req.user);
+    // console.log('Logout completed');
+    res.clearCookie('access_token');
+    await req.user.save();
+    // } catch (error) {
+    //     next(error);
+    // }
 }
 
