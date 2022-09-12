@@ -32,8 +32,8 @@ About API Integration and Redux with the Frontend:
 
 Some Images:
 
-<img src="./YouTube.png"/>
-<img src="./YouTube (1).png"/>
-<img src="./1.PNG"/>
-<img src="./2.PNG"/>
-<img src="./3.PNG"/>
+<img src="./images/YouTube.png"/>
+<img src="./images/YouTube (1).png"/>
+<img src="./images/1.PNG"/>
+<img src="./images/2.PNG"/>
+<img src="./images/3.PNG"/>
