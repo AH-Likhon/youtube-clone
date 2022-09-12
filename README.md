@@ -29,3 +29,11 @@ API: https://youtube-pr.herokuapp.com/api
 About API Integration and Redux with the Frontend:
 
 - I did all CRUD operations with the above API from the frontend. I used the API besides redux, so I sent data to the backend as well as the reducer. Firstly, as I followed the MVC pattern, I configured the schema for authentication, users, and videos in the backend. Then I connected my database with the backend project and wrote all the CRUD operations functionality, and everything was tested against Postman. Then I implemented this API with my frontend. Besides every call of the API, I also implemented redux to get updates at a time in the frontend. Finally, I deployed the backend project on Heroku and the frontend project on Firebase.
+
+Some Images:
+
+<img src="./YouTube.png"/>
+<img src="./YouTube (1).png"/>
+<img src="./1.PNG"/>
+<img src="./2.PNG"/>
+<img src="./3.PNG"/>
