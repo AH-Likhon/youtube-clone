@@ -37,3 +37,6 @@ Some Images:
 <img src="./images/1.PNG"/>
 <img src="./images/2.PNG"/>
 <img src="./images/3.PNG"/>
+
+
+Followed by this docs solved error: https://stackoverflow.com/questions/71582397/eresolve-unable-to-resolve-dependency-tree-while-installing-a-pacakge
