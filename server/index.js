@@ -24,7 +24,8 @@ const connectDB = () => {
 // <-----------------------------  cors option ----------------------------------> //
 const corsOptions = {
     // origin: 'https://fir-21b25.firebaseapp.com',
-    origin: 'http://localhost:3000',
+    // origin: 'http://localhost:3000',
+    origin: 'https://fir-21b25.web.app',
     preflightContinue: true,
     credentials: true,
     optionSuccessStatus: 200
