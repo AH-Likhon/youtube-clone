@@ -1,6 +1,6 @@
 <h2>Youtube</h2>
 
-Live Site: https://fir-21b25.firebaseapp.com/
+Live Site: https://fir-21b25.web.app/
 
 Key Points:
 
@@ -24,7 +24,7 @@ Technologies Used:
 - Mongoose
 - Postman (API Testing)
 
-API: https://youtube-pr.herokuapp.com/api
+API: https://youtube-server-f7jy.onrender.com/api
 
 About API Integration and Redux with the Frontend:
 
