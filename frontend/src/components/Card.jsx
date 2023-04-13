@@ -57,28 +57,28 @@ const Card = ({ type, video }) => {
 
     useEffect(() => {
         const fetchChannel = async () => {
-            const res = await axiosInstance.get(`/users/find/${video.userId}`);
+            const res = await axiosInstance.get(`/users/find/${video?.userId}`);
             // console.log(res);
             setChannel(res.data);
         };
         fetchChannel();
-    }, [video.userId]);
+    }, [video?.userId]);
 
 
 
     return (
         <Link style={{ textDecoration: 'none' }} to={`/video/${video._id}`}>
             <Container type={type}>
-                <Img type={type} src={video.imgUrl} />
+                <Img type={type} src={video?.imgUrl} />
                 {/* <Img type={type} src="https://i9.ytimg.com/vi_webp/k3Vfj-e1Ma4/mqdefault.webp?v=6277c159&sqp=CIjm8JUG&rs=AOn4CLDeKmf_vlMC1q9RBEZu-XQApzm6sA" /> */}
                 <Details type={type}>
-                    <ChannelImg type={type} src={channel.img} />
+                    <ChannelImg type={type} src={channel?.img} />
                     {/* <ChannelImg type={type} src="https://yt3.ggpht.com/yti/APfAmoE-Q0ZLJ4vk3vqmV4Kwp0sbrjxLyB8Q4ZgNsiRH=s88-c-k-c0x00ffffff-no-rj-mo" /> */}
                     <Texts>
                         <Title>{video.title}</Title>
-                        <ChannelName>{channel.name}</ChannelName>
+                        <ChannelName>{channel?.name}</ChannelName>
                         <Info>
-                            {video.views} views • {format(video.createdAt)}
+                            {video?.views} views • {format(video?.createdAt)}
                         </Info>
                     </Texts>
                 </Details>
