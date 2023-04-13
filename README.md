@@ -1,6 +1,6 @@
 <h2>Youtube</h2>
 
-Live Site: https://fir-21b25.web.app/
+Live Site: https://fir-21b25.firebaseapp.com
 
 Key Points:
 
@@ -37,6 +37,5 @@ Some Images:
 <img src="./images/1.PNG"/>
 <img src="./images/2.PNG"/>
 <img src="./images/3.PNG"/>
-
 
 Followed by this docs solved error: https://stackoverflow.com/questions/71582397/eresolve-unable-to-resolve-dependency-tree-while-installing-a-pacakge
