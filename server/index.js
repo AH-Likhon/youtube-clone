@@ -11,9 +11,11 @@ import authRouter from "./routers/auth.js";
 const app = express();
 dotenv.config();
 
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.q3g5t.mongodb.net/?retryWrites=true&w=majority`;
+
 const connectDB = () => {
   mongoose
-    .connect(process.env.DB)
+    .connect(uri)
     .then(() => {
       // console.log("Connected with database");
     })
