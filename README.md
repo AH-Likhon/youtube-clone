@@ -24,7 +24,7 @@ Technologies Used:
 - Mongoose
 - Postman (API Testing)
 
-API: https://youtube-server-f7jy.onrender.com/api
+API: https://youtube-final-server.onrender.com/api
 
 About API Integration and Redux with the Frontend:
 
