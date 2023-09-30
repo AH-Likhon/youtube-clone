@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const axiosInstance = axios.create({
-  baseURL: "https://youtube-final-server.onrender.com/api",
+  baseURL: "https://youtube-server-skmh.onrender.com/api",
   withCredentials: true,
 });
 
