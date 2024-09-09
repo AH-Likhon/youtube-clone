@@ -12,12 +12,17 @@ const app = express();
 dotenv.config();
 
 const connectDB = () => {
+  mongoose.set("strictQuery", true); // Add this line to avoid the warning
   mongoose
-    .connect(process.env)
+    .connect(process.env.DB, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
     .then(() => {
-      // console.log("Connected with database");
+      console.log("Connected to the database");
     })
     .catch((error) => {
+      console.error("Database connection error:", error);
       throw error;
     });
 };
